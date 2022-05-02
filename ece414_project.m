@@ -81,5 +81,3 @@ xlabel('Time (s)');
 ylabel('Ball Position (cm)');
 
 grid on;
-
-
