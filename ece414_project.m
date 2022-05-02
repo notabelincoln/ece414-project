@@ -32,6 +32,7 @@ model = sim('abe_simulink_model.slx',...
 model_x0 = get(model, 'x0');
 model_x0_sl = get(model, 'x0_sl');
 model_theta_r = get(model, 'theta_r');
+model_x = get(model, 'x');
 
 t_x0 = model_x0.Time;
 x0 = model_x0.Data;
@@ -42,8 +43,10 @@ x0_sl = model_x0_sl.Data;
 t_theta_r = model_theta_r.Time;
 theta_r = model_theta_r.Data;
 
-%% plot results
-figure('name', 'ece414 project position');
+t_x = model_x.Time;
+x = model_x.Data;
+%% plot desired ball position
+figure('name', 'ece 414 project desired position');
 yyaxis left;
 stairs(t_x0, x0);
 xlim(t_lims);
@@ -58,3 +61,25 @@ ylim(x_lims);
 ylabel('Slope-Limited Desired Position (cm)');
 
 grid on;
+
+%% plot reference angle
+figure('name', 'ece 414 project angle');
+plot(t_theta_r, theta_r);
+xlim(t_lims);
+ylim(theta_lims);
+xlabel('Time (s)');
+ylabel('\theta _r (rad)', 'interpreter', 'tex');
+
+grid on;
+
+%% plot output position based on simple transfer function
+figure('name', 'ece 414 project position');
+plot(t_x, x);
+xlim(t_lims);
+ylim(x_lims);
+xlabel('Time (s)');
+ylabel('Ball Position (cm)');
+
+grid on;
+
+
